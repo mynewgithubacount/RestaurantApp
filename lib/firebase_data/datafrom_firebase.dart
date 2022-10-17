@@ -94,8 +94,8 @@ class _CategoryAdminState extends State<CategoryAdmin> {
                 child: Column(
                   children: [
                     SizedBox(
-                      width: size.width / 3,
-                      height: size.height * 0.1,
+                      width: size.width / 5,
+                      height: size.height * 0.06,
                       child: Image.network(
                         categories["image"],
                         fit: BoxFit.cover,
@@ -103,24 +103,43 @@ class _CategoryAdminState extends State<CategoryAdmin> {
                     ),
                     Text(
                       categories["name"],
-                      style: TextStyle(fontSize: 20),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    FlatButton.icon(
-                      onPressed: () {
-                        var i;
-                        for (i in categories.values) {
-                          print(i);
-                        }
-                        FirebaseFirestore.instance
-                            .collection("Categories")
-                            .doc(document.id)
-                            .delete();
-                      },
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                      label: Text("Delete"),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            var i;
+                            for (i in categories.values) {
+                              print(i);
+                            }
+                            FirebaseFirestore.instance
+                                .collection("Categories")
+                                .doc(document.id)
+                                .delete();
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.red,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.edit,
+                            color: Color.fromARGB(255, 244, 54, 165),
+                            size: 30,
+                          ),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -236,16 +255,19 @@ class _DishlistforUserState extends State<DishlistforUser> {
                           children: [
                             Container(
                               width: size.width * 0.37,
-                              child: FlatButton(
+                              child: TextButton(
                                 onPressed: () {},
                                 child: Text(
                                   "Command",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                color: Colors.green.shade400,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0))),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                ),
                               ),
                             ),
                             Chip(
@@ -257,7 +279,7 @@ class _DishlistforUserState extends State<DishlistforUser> {
                             SizedBox(height: 5),
                             Text(
                                 "number of dish: ${dish["totaldish"].toString()}"),
-                            FlatButton.icon(
+                            TextButton.icon(
                               onPressed: () {
                                 // print(dish);
                                 print(document.id);
@@ -271,10 +293,12 @@ class _DishlistforUserState extends State<DishlistforUser> {
                               },
                               icon: Icon(Icons.breakfast_dining),
                               label: Text("more details"),
-                              color: Color.fromARGB(255, 175, 177, 175),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                              ),
                             ),
                           ],
                         ),
@@ -458,15 +482,18 @@ class _DishlistdetailsforUserState extends State<DishlistdetailsforUser> {
 
                 Container(
                   width: size.width / 2,
-                  child: FlatButton(
+                  child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Command",
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.green.shade400,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green.shade400,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                    ),
                   ),
                 ),
                 Container(
@@ -495,25 +522,28 @@ class _DishlistdetailsforUserState extends State<DishlistdetailsforUser> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FlatButton.icon(
+                    TextButton.icon(
                       onPressed: () {},
                       label: Text(
                         "Send",
-                        style: TextStyle(fontSize: 23),
+                        style: TextStyle(
+                          fontSize: 23,
+                          color: Color.fromARGB(255, 9, 134, 236),
+                        ),
                       ),
-                      textColor: Color.fromARGB(255, 9, 114, 185),
                       icon: Icon(
                         Icons.send,
                         textDirection: TextDirection.ltr,
                       ),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {},
                       child: Text(
                         "Cancel",
-                        style: TextStyle(fontSize: 22),
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: Color.fromARGB(255, 197, 77, 2)),
                       ),
-                      textColor: Color.fromARGB(255, 197, 77, 2),
                     ),
                   ],
                 ),
@@ -564,74 +594,95 @@ class _DishforAdminviewState extends State<DishforAdminview> {
                   // global colunm dish
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // first column
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              dish["name"],
-                              style: TextStyle(
-                                fontSize: 18,
+                        Container(
+                          width: size.width / 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                dish["name"],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            SizedBox(
-                              width: size.width / 2,
-                              height: size.height * 0.2,
-                              child: Image.network(
-                                dish["image"],
-                                fit: BoxFit.cover,
+                              SizedBox(height: 10),
+                              SizedBox(
+                                width: size.width / 3,
+                                height: size.height * 0.13,
+                                child: Image.network(
+                                  dish["image"],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                          ],
+                              SizedBox(height: 10),
+                            ],
+                          ),
                         ),
                         // seconde column
                         SizedBox(
-                          width: 20,
+                          width: 12,
+                        ),
+                        Container(
+                          // color: Colors.black,
+                          width: size.width / 3,
+                          child: Column(
+                            children: [
+                              Chip(
+                                label: Text(
+                                    "Price:  ${dish["price"].toString()} FCFA"),
+                                backgroundColor: Colors.yellow.shade600,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                  "number of dish: ${dish["totaldish"].toString()}"),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 14,
                         ),
                         Column(
                           children: [
-                            Chip(
+                            TextButton.icon(
+                              onPressed: () {
+                                _showMessage(
+                                    "Voullez-vous vraiment supprimer ce plat?",
+                                    document.id);
+                                if (confirmation) {
+                                  confirmation = true;
+                                }
+                              },
+                              icon: Icon(Icons.delete),
                               label: Text(
-                                  "Price:  ${dish["price"].toString()} FCFA"),
-                              backgroundColor: Colors.yellow.shade600,
+                                "Delete",
+                                style: TextStyle(fontSize: 17),
+                              ),
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(15.0))),
+                              ),
                             ),
-                            SizedBox(height: 10),
-                            Text(
-                                "number of dish: ${dish["totaldish"].toString()}"),
+                            TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(Icons.edit_sharp),
+                              label:
+                                  Text("Edit", style: TextStyle(fontSize: 17)),
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 233, 62, 119),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                              ),
+                            ),
                           ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FlatButton.icon(
-                          onPressed: () {
-                            _showMessage(
-                                "Voullez-vous vraiment supprimer ce plat?",
-                                document.id);
-                            if (confirmation) {
-                              confirmation = true;
-                            }
-                          },
-                          icon: Icon(Icons.delete),
-                          label: Text("Delete"),
-                          color: Colors.red,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                        ),
-                        FlatButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.update),
-                          label: Text("Update"),
-                          color: Colors.yellow.shade200,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
                         ),
                       ],
                     ),
@@ -669,7 +720,7 @@ class _DishforAdminviewState extends State<DishforAdminview> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                FlatButton(
+                TextButton(
                     onPressed: () {
                       setState(() {
                         dureUpdate(1);
@@ -684,7 +735,7 @@ class _DishforAdminviewState extends State<DishforAdminview> {
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 255, 177, 171)),
                     )),
-                FlatButton(
+                TextButton(
                     onPressed: () {
                       FirebaseFirestore.instance
                           .collection("foods")

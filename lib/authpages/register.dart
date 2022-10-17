@@ -48,17 +48,19 @@ class _RegisterState extends State<Register> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  RaisedButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.green),
                       child: Text("YES"),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const ContenueDynamic()));
                       }),
-                  RaisedButton(
-                      color: Colors.grey,
-                      textColor: Colors.red,
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.red,
+                          backgroundColor: Colors.grey),
                       child: Text("NO"),
                       onPressed: () {
                         Navigator.pop(context);
@@ -152,7 +154,7 @@ class _RegisterState extends State<Register> {
             ),
             Container(
               width: 180,
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     FirebaseAuth.instance
@@ -161,7 +163,7 @@ class _RegisterState extends State<Register> {
                             password: passwordcontroller.text)
                         .then((value) {
                       cleansignupfields();
-                      print("Created New Account");
+                      // print("Created New Account");
                       dialog("Count created successfully!!",
                           "Do you want to log in now?");
 
@@ -172,10 +174,12 @@ class _RegisterState extends State<Register> {
                     });
                   }
                 },
-                color: Colors.red,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
                 child: Text(
                   "Validate",

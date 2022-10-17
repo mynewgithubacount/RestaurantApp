@@ -49,9 +49,12 @@ class _LoginState extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  RaisedButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    primary: Colors.white, // foreground
+                    backgroundColor: Colors.green,
+                    
+                  ),
                       child: Text("Try again"),
                       onPressed: () {
                         Navigator.pop(context);
@@ -137,12 +140,12 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                FlatButton(onPressed: () {}, child: Text("password forgot?")),
+                TextButton(onPressed: () {}, child: Text("password forgot?")),
               ],
             ),
             Container(
               width: 180,
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     FirebaseAuth.instance
@@ -158,10 +161,12 @@ class _LoginState extends State<Login> {
                     });
                   }
                 },
-                color: Colors.red,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.red,
+                   shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
+                ), 
                 ),
                 child: Text(
                   "Confirm",

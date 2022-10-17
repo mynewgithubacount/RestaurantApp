@@ -126,7 +126,7 @@ class _UserAcceuilState extends State<UserAcceuil> {
                       return AlertDialog(
                         content: Text('Voulez vous vraiment vous deconnectez?'),
                         actions: [
-                          new FlatButton(
+                          new TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -145,7 +145,7 @@ class _UserAcceuilState extends State<UserAcceuil> {
                               ),
                             ),
                           ),
-                          new FlatButton(
+                          new TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },

@@ -49,7 +49,7 @@ class _AdminP_loginState extends State<AdminP_login> {
                 controller: codecontroller,
               ),
             ),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   if (_formkey.currentState!.validate() &&
                       codecontroller.text == "pourmoi") {

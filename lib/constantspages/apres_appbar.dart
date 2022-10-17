@@ -147,12 +147,14 @@ class _ContenueDynamicState extends State<ContenueDynamic> {
                               children: [
                                 Container(
                                   width: 100,
-                                  child: RaisedButton(
-                                    color: couleurLogin,
-                                    hoverElevation: 20,
+                                  child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                    foregroundColor: logintextcolor,
+                                    backgroundColor: couleurLogin,
                                     elevation: 0,
-                                    textColor: logintextcolor,
                                     shape: StadiumBorder(),
+                                  ),
+                                   
                                     onPressed: () {
                                       setState(() {
                                         retourLogin();
@@ -173,12 +175,18 @@ class _ContenueDynamicState extends State<ContenueDynamic> {
                                 ),
                                 Container(
                                   width: 100,
-                                  child: RaisedButton(
-                                    color: couleurRegister,
-                                    hoverElevation: 20,
+                                  child: ElevatedButton(
+                                     style: ElevatedButton.styleFrom(
+                                    foregroundColor: registertextcolor,
+                                    backgroundColor: couleurRegister,
                                     elevation: 0,
-                                    textColor: registertextcolor,
                                     shape: StadiumBorder(),
+                                  ),
+                                    // color: couleurRegister,
+                                    // hoverElevation: 20,
+                                    // elevation: 0,
+                                    // textColor: registertextcolor,
+                                    // shape: StadiumBorder(),
                                     onPressed: () {
                                       setState(() {
                                         retourResiter();

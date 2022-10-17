@@ -550,9 +550,12 @@ class _AddCategoryState extends State<AddCategory> {
               SizedBox(
                 height: 20,
               ),
-              RaisedButton(
-                  color: Colors.grey,
-                  textColor: Colors.red,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.red,
+                  backgroundColor: Colors.grey
+                ),
+                 
                   child: Text("OK"),
                   onPressed: () {
                     Navigator.pop(context);

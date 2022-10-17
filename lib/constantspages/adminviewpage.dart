@@ -24,19 +24,21 @@ class HomepageforUserList extends StatelessWidget {
         title: Text("Your items list"),
         centerTitle: true,
         actions: [
-          FlatButton.icon(
+          TextButton.icon(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const ConfigAdmin()));
               },
-              icon: Icon(Icons.settings, size: 35),
-              label: Text("Config items")),
-          // FlatButton.icon(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.settings_ethernet, size: 35),
-
-          // ),
+              icon: Icon(Icons.add_box, size: 35),
+              label: Text("New item"),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),),
+        
         ],
+        // bottom: ,
+        elevation: 0.0,
+        // toolbarHeight: size.height*0.1,
       ),
       // MENU
       drawer: Container(
@@ -86,7 +88,7 @@ class HomepageforUserList extends StatelessWidget {
                       return AlertDialog(
                         content: Text('Voulez vous vraiment vous deconnectez?'),
                         actions: [
-                          new FlatButton(
+                          new TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -102,7 +104,7 @@ class HomepageforUserList extends StatelessWidget {
                               ),
                             ),
                           ),
-                          new FlatButton(
+                          new TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -148,6 +150,7 @@ class HomepageforUserList extends StatelessWidget {
 
       body: SingleChildScrollView(
         child: Column(
+          
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -158,7 +161,7 @@ class HomepageforUserList extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              height: size.height * 0.216,
+              height: size.height * 0.15,
               child: CategoryAdmin(),
             ),
             Divider(
@@ -174,7 +177,7 @@ class HomepageforUserList extends StatelessWidget {
               ),
             ),
             Container(
-                color: Colors.red.shade100,
+                color: Colors.white,
                 height: size.height * 0.6,
                 width: double.infinity,
                 child: DishforAdminview()),
