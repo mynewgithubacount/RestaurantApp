@@ -65,7 +65,21 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  # fonts:
+  #   - family: Raleway
+  #     fonts:
+  #       - asset: fonts/
+  #         style: italic
+  #   - family: RobotoMono
+  #     fonts:
+  #       - asset: fonts/static/
+  #         weight: 700
+  #         style: italic
+  #   - family: SansSerif
+  #     fonts:
+  #       - asset: fonts/
+          # weight: 700
+          
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -38,10 +38,10 @@ class _UserAcceuilState extends State<UserAcceuil> {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text("you're welcome!"),
-
+        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 239, 11, 11),
-        foregroundColor: Colors.black,
+        foregroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0.0,
         // elevation: 0.0,
         leading: IconButton(
@@ -55,25 +55,17 @@ class _UserAcceuilState extends State<UserAcceuil> {
           ),
         ),
         actions: [
-          IconButton(
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+            child: IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.settings,
-                size: 32,
-                color: Colors.grey.shade800,
-              )),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.account_circle,
-              size: 45,
-              color: Color.fromARGB(255, 255, 255, 255),
+                Icons.account_circle,
+                size: 45,
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
             ),
           ),
-          SizedBox(
-              width: 6,
-
-              )
         ],
       ),
       // user drawer menu
@@ -238,11 +230,12 @@ class _UserAcceuilState extends State<UserAcceuil> {
                           BoxShadow(
                             offset: Offset(1, 5),
                             blurRadius: 30,
-                            color: Colors.grey.shade600,
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
                         ],
                         borderRadius: BorderRadius.circular(40)),
-                    child: TextField(
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         labelText: "Search your food",
                         labelStyle: TextStyle(fontSize: 18),
@@ -258,14 +251,14 @@ class _UserAcceuilState extends State<UserAcceuil> {
                 ],
               ),
               width: double.infinity,
-              height: size.height * 0.26,
+              height: size.height * 0.20,
               decoration: BoxDecoration(
-                // image: DecorationImage(
-                //   image: AssetImage("images/restorant/télécharger (2).jpeg"),
-                //   fit: BoxFit.fill,
-                // ),
+                image: DecorationImage(
+                  image: AssetImage("images/restorant/télécharger (2).jpeg"),
+                  fit: BoxFit.fill,
+                ),
 
-                gradient: getusercolor(),
+                // gradient: getusercolor(),
               ),
             ),
 
@@ -285,8 +278,8 @@ class _UserAcceuilState extends State<UserAcceuil> {
 
             // to get liste of category from firebase
             Container(
-              color: Color.fromARGB(255, 245, 243, 243),
-              height: size.height * 0.18,
+              // color: Color.fromARGB(255, 245, 243, 243),
+              height: size.height * 0.1,
               width: double.infinity,
               child: Category(),
             ),

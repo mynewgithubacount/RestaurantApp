@@ -103,7 +103,8 @@ class _ConfigAdminState extends State<ConfigAdmin> {
 }
 
 class Addfood extends StatefulWidget {
-  const Addfood({Key? key}) : super(key: key);
+   
+   Addfood();
 
   @override
   State<Addfood> createState() => _AddfoodState();
@@ -156,7 +157,7 @@ class _AddfoodState extends State<Addfood> {
     }
   }
 
-  // function to get gallery image
+  // function to get camera image
   Future imageSelectorCamera() async {
     try {
       final image = (await ImagePicker().pickImage(
@@ -459,6 +460,7 @@ class _AddfoodState extends State<Addfood> {
 
               //Add button
               Container(
+
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size.fromHeight(
@@ -522,6 +524,8 @@ class _AddfoodState extends State<Addfood> {
 
 // category adding page configuration
 class AddCategory extends StatefulWidget {
+
+
   @override
   State<AddCategory> createState() => _AddCategoryState();
 }

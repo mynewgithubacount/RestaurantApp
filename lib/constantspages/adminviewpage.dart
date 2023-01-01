@@ -160,6 +160,7 @@ class HomepageforUserList extends StatelessWidget {
               ),
             ),
             Container(
+              color: Colors.white,
               width: double.infinity,
               height: size.height * 0.15,
               child: CategoryAdmin(),

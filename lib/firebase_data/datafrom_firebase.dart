@@ -6,6 +6,8 @@ import 'dart:async';
 
 import 'package:restaurantapp/constantspages/transition.dart';
 
+import 'editdish.dart';
+
 class Category extends StatefulWidget {
   const Category({Key? key}) : super(key: key);
 
@@ -36,19 +38,27 @@ class _CategoryState extends State<Category> {
                   document.data()! as Map<String, dynamic>;
               return Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Column(
+                child: Row(
                   children: [
-                    SizedBox(
-                      width: size.width / 3,
-                      height: size.height * 0.1,
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      width: 50,
+                      height: 50,
                       child: Image.network(
                         categories["image"],
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
-                      categories["name"],
-                      style: TextStyle(fontSize: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        categories["name"],
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ],
                 ),
@@ -93,9 +103,15 @@ class _CategoryAdminState extends State<CategoryAdmin> {
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Column(
                   children: [
-                    SizedBox(
-                      width: size.width / 5,
-                      height: size.height * 0.06,
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      width: 50,
+                      height: 50,
+                      // width: size.width / 5,
+                      // height: size.height * 0.06,
                       child: Image.network(
                         categories["image"],
                         fit: BoxFit.cover,
@@ -103,8 +119,10 @@ class _CategoryAdminState extends State<CategoryAdmin> {
                     ),
                     Text(
                       categories["name"],
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Row(
                       children: [
@@ -201,10 +219,7 @@ class _DishlistforUserState extends State<DishlistforUser> {
               dish = document.data()! as Map<String, dynamic>;
               // print(document.reference.path);
               idDoc = document.reference.path;
-              // FirebaseFirestore.instance
-              //     .collection('foods')
-              //     .doc(document.reference.path)
-              //     .get();
+
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -219,7 +234,8 @@ class _DishlistforUserState extends State<DishlistforUser> {
                             Text(
                               dish["name"],
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             SizedBox(height: 10),
@@ -253,32 +269,16 @@ class _DishlistforUserState extends State<DishlistforUser> {
                         ),
                         Column(
                           children: [
-                            Container(
-                              width: size.width * 0.37,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Command",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.green,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0))),
-                                ),
-                              ),
-                            ),
-                            Chip(
-                              label: Text(
-                                  "Price:  ${dish["price"].toString()} FCFA"),
-                              backgroundColor:
-                                  Color.fromARGB(255, 236, 225, 172),
-                            ),
-                            SizedBox(height: 5),
                             Text(
-                                "number of dish: ${dish["totaldish"].toString()}"),
+                              "Prix:  ${dish["price"].toString()} FCFA",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              "Nombre de plat: ${dish["totaldish"].toString()}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, fontSize: 18),
+                            ),
                             TextButton.icon(
                               onPressed: () {
                                 // print(dish);
@@ -295,9 +295,30 @@ class _DishlistforUserState extends State<DishlistforUser> {
                               label: Text("more details"),
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.grey,
+                                foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10.0))),
+                              ),
+                            ),
+                            Container(
+                              width: size.width * 0.32,
+                              child: TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  "Commander",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.orange,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                ),
                               ),
                             ),
                           ],
@@ -360,197 +381,242 @@ class _DishlistdetailsforUserState extends State<DishlistdetailsforUser> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print(dishn);
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(" Details of ${dishn["name"]}"),
-          centerTitle: true,
-        ),
-        body: ListView(scrollDirection: Axis.vertical, children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              // global colunm dish
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      dishn["name"],
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.red,
+    // print(dishn);
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(" Details of ${dishn["name"]}"),
+            centerTitle: true,
+            backgroundColor: Color.fromARGB(255, 252, 126, 117),
+            elevation: 0.0,
+          ),
+          body: ListView(scrollDirection: Axis.vertical, children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                // global colunm dish
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        dishn["name"],
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.red,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        height: size.height / 3,
+                        child: Image.network(
+                          dishn["image"],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                  // seconde column
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Chip(
+                        label: Text("Prix:  ${dishn["price"].toString()} FCFA"),
+                        backgroundColor: Colors.yellow.shade600,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 40),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                // print(iddocn);
+                                addlike(iddocn, dishn["like"]);
+                              },
+                              icon: Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                                size: 25,
+                              ),
+                            ),
+                            Text(
+                              "Like: ${dishn["like"].toString()}",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 10),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("nombre de plat:",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      Text(
+                        " ${dishn["totaldish"].toString()}",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.red,
+                            fontFamily: "Impact"),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    height: 20,
+                    indent: 27,
+                    thickness: 2,
+                    endIndent: 27,
+                  ),
+                  Text(
+                    "A propos de ${dishn["name"]} :",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        fontFamilyFallback: ["Impact", "Time New Romain"],
+                        color: Colors.blue.shade600),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    dishn["details"],
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Divider(
+                    height: 20,
+                    indent: 27,
+                    thickness: 2,
+                    endIndent: 27,
+                  ),
+
+                  Container(
+                    width: size.width / 2,
+                    padding: EdgeInsets.all(15),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Commander",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      height: size.height / 3,
-                      child: Image.network(
-                        dishn["image"],
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                ),
-                // seconde column
-                SizedBox(
-                  width: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Chip(
-                      label: Text("Price:  ${dishn["price"].toString()} FCFA"),
-                      backgroundColor: Colors.yellow.shade600,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 40),
-                      child: Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              print(iddocn);
-                              addlike(iddocn, dishn["like"]);
-                            },
-                            icon: Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                              size: 25,
+                  ),
+
+                  Container(
+                    color: Colors.grey.shade200,
+                    // height: size.height * 0.2,
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Commenter le plat",
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.comment,
+                                color: Colors.blue,
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 165, 165, 165),
+                          ),
+                          child: TextFormField(
+                            controller: commentfoodCrontroller,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 4,
+                            style: TextStyle(color: Colors.white),
+                            autofocus: false,
+                            autocorrect: true,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(20),
+                              fillColor: Color.fromARGB(255, 39, 230, 22),
+                              hintText: "Entrer votre commentaire...",
+                              hintStyle: TextStyle(color: Colors.white),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1, color: Colors.redAccent),
+                              ),
                             ),
                           ),
-                          Text(
-                            "Like: ${dishn["like"].toString()}",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 10),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("number of dish:",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    Text(
-                      " ${dishn["totaldish"].toString()}",
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.red,
-                          fontFamily: "Impact"),
-                    ),
-                  ],
-                ),
-                Divider(
-                  height: 20,
-                  indent: 27,
-                  thickness: 2,
-                  endIndent: 27,
-                ),
-                Text(
-                  "About ${dishn["name"]} specificity :",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      fontFamilyFallback: ["Impact", "Time New Romain"],
-                      color: Colors.blue.shade600),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  dishn["details"],
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-                Divider(
-                  height: 20,
-                  indent: 27,
-                  thickness: 2,
-                  endIndent: 27,
-                ),
-
-                Container(
-                  width: size.width / 2,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Command",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green.shade400,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ListTile(
-                    title: Row(
-                      children: [
-                        Text("Comment this food: "),
-                        Expanded(
-                            child: TextField(
-                          controller: commentfoodCrontroller,
-                          maxLines: 4,
-                          decoration: InputDecoration(border: InputBorder.none),
-                        )),
-                        SizedBox(
-                          height: 20,
                         ),
                       ],
                     ),
                   ),
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      label: Text(
-                        "Send",
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Color.fromARGB(255, 9, 134, 236),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12, right: 12, top: 8, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Annuler",
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Color.fromARGB(255, 197, 77, 2)),
+                          ),
                         ),
-                      ),
-                      icon: Icon(
-                        Icons.send,
-                        textDirection: TextDirection.ltr,
-                      ),
+                        TextButton.icon(
+                          onPressed: () {},
+                          label: Text(
+                            "Envoyer",
+                            style: TextStyle(
+                              fontSize: 23,
+                              color: Color.fromARGB(255, 9, 134, 236),
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.send,
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Cancel",
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Color.fromARGB(255, 197, 77, 2)),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ]));
+                  ),
+                ],
+              ),
+            )
+          ])),
+    );
   }
 }
 
@@ -669,7 +735,14 @@ class _DishforAdminviewState extends State<DishforAdminview> {
                               ),
                             ),
                             TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => EditDish(
+                                          iddoc: document.id,
+                                          dish: document.data()
+                                              as Map<String, dynamic>,
+                                        )));
+                              },
                               icon: Icon(Icons.edit_sharp),
                               label:
                                   Text("Edit", style: TextStyle(fontSize: 17)),
